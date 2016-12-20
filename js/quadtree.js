@@ -99,7 +99,7 @@ function Quadtree(level, bounds) {
 
     for (obj of this.objects) {
       var dist = (pow((obj.pos.x - targetObj.pos.x),2) + pow((obj.pos.y - targetObj.pos.y),2));
-      if ((dist < 100000) && (obj != targetObj)) {
+      if ((dist < pow(targetObj.r,2)*8 + pow(obj.r, 2)*8) && (obj != targetObj)) {
         retObjs.push(obj);
       }
     }
