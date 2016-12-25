@@ -19,7 +19,7 @@ var params = {timescale: 1};
 var asteroids = [];
 var allObjects = [];
 var fr = 60;
-var score = 0;
+var score;
 var gameover = false;
 
 var mod = function (n, m) {
@@ -30,6 +30,7 @@ var mod = function (n, m) {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	ship = new Ship();
+  score = new Score();
 	allObjects.push(ship);
 	for (var i = 0; i<15; i++) {
 		asteroids[i] = new Asteroid();
@@ -113,7 +114,6 @@ function detectShipCollisions() {
 			}
 		} else {
 			ship.destruct(params);
-			alert("Final Score: " + score.toString() + "\nPlease refresh the page to play again.");
 			gameover = true;
 		}
 	}
@@ -168,8 +168,7 @@ function detectLaserCollisions() {
 							allObjects.push(asteroid);
 						});
 					} else {
-						score ++;
-						console.log(score);
+            score.increment();
 					}
 				}
 			}
@@ -195,6 +194,7 @@ function update() {
 			}
 		}
 	}
+  score.draw();
 	quadtree.update(qt_objs);
 
 	if (!gameover) {
