@@ -22,15 +22,20 @@ var fr = 60;
 var score;
 var gameover = false;
 
+var SystemFont;
+
 var mod = function (n, m) {
     var remain = n % m;
     return Math.floor(remain >= 0 ? remain : remain + m);
 };
 
+function preload() {
+	SystemFont = loadFont("fonts/Exo-ExtraLight.ttf");
+}
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	ship = new Ship();
-  score = new Score();
+    score = new Score();
 	allObjects.push(ship);
 	for (var i = 0; i<15; i++) {
 		asteroids[i] = new Asteroid();
